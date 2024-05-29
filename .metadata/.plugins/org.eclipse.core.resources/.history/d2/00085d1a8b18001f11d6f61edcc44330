@@ -1,0 +1,9 @@
+package com.herokuapp.theinternet;
+
+public class PositiveTests {
+	
+	public void loginTest() {
+		
+	}
+
+}

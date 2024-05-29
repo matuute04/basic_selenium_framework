@@ -1,0 +1,24 @@
+package com.herokuapp.theinternet;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class PositiveTests {
+	
+	public void loginTest() {
+		//Create a driver
+		WebDriver driver = new ChromeDriver();
+		//open test page
+		//enter username
+		//enter password
+		//click login button
+		
+		//verifications:
+		//	-new url
+		//	-logout button is visible
+		//	-succesful login msg
+		
+		
+	}
+
+}

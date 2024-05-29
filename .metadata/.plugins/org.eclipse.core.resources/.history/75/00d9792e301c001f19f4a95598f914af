@@ -1,0 +1,145 @@
+package com.herokuapp.theinternet;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class NegativeTest {
+
+	WebDriver driver;
+
+	@BeforeTest
+	static void setupAll() {
+		WebDriverManager.chromedriver().setup();
+	}
+
+	@AfterTest
+	void teardown() {
+		driver.quit();
+	}
+
+	@Test(priority = 2)
+	public void NegativeUsernameTest() {
+		System.out.println("Test started");
+		// Create a driver
+		driver = new ChromeDriver();
+		System.out.println("Browser is opened");
+		sleep(1);
+
+		// open test page
+		String url = "https://the-internet.herokuapp.com/login";
+		driver.get(url);
+		sleep(1);
+
+		driver.manage().window().maximize();
+
+		sleep(1);
+
+		System.out.println("Page is opened");
+		sleep(2);
+
+		// enter wrong username
+		WebElement username = driver.findElement(By.id("username"));
+		username.sendKeys("incorrect");
+
+		// enter password
+		WebElement password = driver.findElement(By.name("password"));
+		password.sendKeys("SuperSecretPassword!");
+
+		sleep(4);
+		// click login button
+		WebElement logInButton = driver.findElement(By.tagName("button"));
+		logInButton.click();
+		
+		sleep(4);
+		// verifications:
+		// -same url
+		String expectedURL = "https://the-internet.herokuapp.com/login";
+		String actualURL = driver.getCurrentUrl();
+		Assert.assertEquals(actualURL, expectedURL, "Actual page url is not the same as expected");
+		
+		// -invalid login msg
+		WebElement errorMessage = driver.findElement(By.xpath("//div[@id='flash']"));
+		String expectedErrorMessage = "Your username is invalid!";
+		String actualMessage = errorMessage.getText();
+		
+		Assert.assertTrue(actualMessage.contains(expectedErrorMessage),
+				"Actual message does not the contain expected.\nActual Message: " + actualMessage
+						+ "\n Expected Error Message: " + expectedErrorMessage);
+		
+		System.out.println("Invalid username message was displayed");
+
+		System.out.println("Test finished");
+		driver.quit();
+	}
+
+	@Test(priority = 1)
+	public void NegativePasswordTest() {
+		System.out.println("Test started");
+		// Create a driver
+		driver = new ChromeDriver();
+		System.out.println("Browser is opened");
+		sleep(1);
+
+		// open test page
+		String url = "https://the-internet.herokuapp.com/login";
+		driver.get(url);
+		sleep(1);
+
+		driver.manage().window().maximize();
+
+		sleep(1);
+
+		System.out.println("Page is opened");
+		sleep(2);
+
+		// enter username
+		WebElement username = driver.findElement(By.id("username"));
+		username.sendKeys("tomsmith");
+
+		// enter wrong password
+		WebElement password = driver.findElement(By.name("password"));
+		password.sendKeys("IncorrectPassword");
+
+		sleep(4);
+		// click login button
+		WebElement logInButton = driver.findElement(By.tagName("button"));
+		logInButton.click();
+		
+		sleep(4);
+		// verifications:
+		// -same url
+		String expectedURL = "https://the-internet.herokuapp.com/login";
+		String actualURL = driver.getCurrentUrl();
+		Assert.assertEquals(actualURL, expectedURL, "Actual page url is not the same as expected");
+		
+		// -invalid login msg
+		WebElement errorMessage = driver.findElement(By.xpath("//div[@id='flash']"));
+		String expectedErrorMessage = "Your password is invalid!";
+		String actualMessage = errorMessage.getText();
+		
+		Assert.assertTrue(actualMessage.contains(expectedErrorMessage),
+				"Actual message does not the contain expected.\nActual Message: " + actualMessage
+						+ "\n Expected Error Message: " + expectedErrorMessage);
+		
+		System.out.println("Invalid password message was displayed");
+
+		System.out.println("Test finished");
+		driver.quit();
+	}
+	private void sleep(int seconds) {
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;selenium_for_begginers&apos; to &apos;my_selenium_freamwork&apos;" description="Rename resource &apos;selenium_for_begginers&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/selenium_for_begginers" name="my_selenium_freamwork" stamp="1716991929565" updateReferences="true"/>
+</session>

@@ -1,0 +1,8 @@
+package com.herokuapp.theinternet;
+
+public class NegativeTest {
+	
+	public void NegativeUsernameTest() {
+		
+	}
+}

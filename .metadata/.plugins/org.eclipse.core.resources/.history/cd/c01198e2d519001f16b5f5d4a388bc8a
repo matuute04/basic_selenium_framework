@@ -1,0 +1,95 @@
+package com.herokuapp.theinternet;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class PositiveTests {
+
+	WebDriver driver;
+
+	@BeforeTest
+	static void setupAll() {
+		WebDriverManager.chromedriver().setup();
+	}
+
+	@AfterTest
+	void teardown() {
+		driver.quit();
+	}
+
+	@Test
+	public void loginTest() {
+		System.out.println("Test started");
+		// Create a driver
+		driver = new ChromeDriver();
+		System.out.println("Browser is opened");
+		sleep(1);
+
+		// open test page
+		String url = "https://the-internet.herokuapp.com/login";
+		driver.get(url);
+		sleep(1);
+
+		driver.manage().window().maximize();
+
+		sleep(1);
+
+		System.out.println("Page is opened");
+		sleep(2);
+
+		// enter username
+		WebElement username = driver.findElement(By.id("username"));
+		username.sendKeys("tomsmith");
+		
+		// enter password
+		WebElement password = driver.findElement(By.name("password"));
+		password.sendKeys("SuperSecretPassword!");
+
+		sleep(4);
+		// click login button
+		WebElement logInButton = driver.findElement(By.tagName("button"));
+		logInButton.click();
+
+		sleep(4);
+		// verifications:
+		// -new url
+		String expectedURL = "https://the-internet.herokuapp.com/secure";
+		String actualURL = driver.getCurrentUrl();
+		Assert.assertEquals(actualURL, expectedURL,"Actual page url is not the same as expected");
+		
+		// -logout button is visible
+		WebElement logOutButton = driver.findElement(By.xpath("//a[@class='button secondary radius']"));
+//		WebElement logOutButton = driver.findElement(By.xpath("//a[@class='button secondary radius broken']"));
+		Assert.assertTrue(logOutButton.isDisplayed(), "Log out button is not displayed");
+		
+		// -succesful login msg
+//		WebElement successMessage = driver.findElement(By.cssSelector("#flash"));
+		WebElement successMessage = driver.findElement(By.xpath("//div[@id='flash']"));
+
+		driver.close();
+		System.out.println("Test finished");
+	}
+
+	/**
+	 * Stop executions for given amount of time
+	 * 
+	 * @param seconds
+	 */
+	private void sleep(int seconds) {
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

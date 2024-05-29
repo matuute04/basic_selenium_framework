@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="AllTests" verbose="1">
+	<test name="NegativeTests">
+<!-- 		<groups> -->
+<!-- 			<run> -->
+<!-- 				<include name="smokeTests" /> -->
+<!-- 			</run> -->
+<!-- 		</groups> -->
+		
+		<classes>
+			<class name="">
+				<methods>
+					<include name="smokeTests"/>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

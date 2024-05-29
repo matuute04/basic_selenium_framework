@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="AllTests" verbose="1">
+	<test name="NegativeTests">
+		<groups>
+			<run>
+				<include name="functest" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.herokuapp.theinternet.NegativeTest" />
+		</classes>
+	</test>

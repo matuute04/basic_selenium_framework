@@ -1,0 +1,53 @@
+package com.herokuapp.theinternet;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class PositiveTests {
+	
+	@Test
+	public void loginTest() {
+		System.out.println("Test started");
+		//Create a driver
+		WebDriver driver = new ChromeDriver();
+		System.out.println("Browser is opened");
+		sleep(1);
+		
+		//open test page
+		String url = "https://the-internet.herokuapp.com/login"; 
+		driver.get(url);
+		sleep(1);
+		
+		driver.manage().window().maximize();
+		
+		sleep(1);
+		
+		System.out.println("Page is opened");
+		
+		//enter username
+		//enter password
+		//click login button
+		
+		//verifications:
+		//	-new url
+		//	-logout button is visible
+		//	-succesful login msg
+		
+		System.out.println("Test finished");
+	}
+
+	/**
+	 * Stop executions for given amount of time
+	 * @param seconds
+	 */
+	private void sleep(int seconds) {
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
